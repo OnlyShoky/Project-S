@@ -3,9 +3,11 @@ using System.Collections;
 
 public class Sensor_Prototype : MonoBehaviour {
 
-    private int m_ColCount = 0;
+    public int m_ColCount = 0;
 
-    private float m_DisableTimer;
+    private float m_DisableTimer = 0;
+
+
 
     private void OnEnable()
     {
@@ -21,6 +23,7 @@ public class Sensor_Prototype : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         m_ColCount++;
     }
 
