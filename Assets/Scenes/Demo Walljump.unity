@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 514787483}
   - component: {fileID: 514787485}
   - component: {fileID: 514787484}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PlatformCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -20,6 +20,7 @@ public class Hero : MonoBehaviour {
     private int                 m_facingDirection = 1;
     private float               m_disableMovementTimer = 0.0f;
     float inputX = 0.0f;
+    float inputY = 0.0f;
 
 
     [Header("Grounded")]
@@ -67,7 +68,7 @@ public class Hero : MonoBehaviour {
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
-        bool touchingGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+        bool touchingGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, LayerMask.GetMask("GroundLayer","PlatformLayer")); 
 
         if (touchingGround)
         {
@@ -81,10 +82,14 @@ public class Hero : MonoBehaviour {
         }
 
         // -- Handle input and movement --
-        
+
 
         if (m_disableMovementTimer < 0.0f)
+        {
             inputX = Input.GetAxis("Horizontal");
+            inputY = Input.GetAxis("Vertical");
+
+        }
 
 
 
@@ -139,6 +144,8 @@ public class Hero : MonoBehaviour {
             m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
             //m_groundSensor.Disable(0.2f);
         }
+        else if(inputY<0 && isGrounded && !m_moving)
+            m_animator.SetInteger("AnimState", 2);
 
         //Run
         else if(m_moving)
