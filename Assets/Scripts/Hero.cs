@@ -45,9 +45,17 @@ public class Hero : MonoBehaviour {
     float jumpTime;
     private Dust_DestroyEvent dustWallSlidingDestroyer;
 
-   
 
-    
+    [Header("Crouching")]
+
+    float colSizeY;
+    float colOffsetY;
+
+
+
+
+
+
 
 
 
@@ -58,8 +66,14 @@ public class Hero : MonoBehaviour {
         m_body2d = GetComponent<Rigidbody2D>();
         m_audioSource = GetComponent<AudioSource>();
         m_audioManager = AudioManager_PrototypeHero.instance;
-        //m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
-       
+
+        //Crouching get values of collider
+        colSizeY = this.GetComponent<BoxCollider2D>().size.y;
+        colOffsetY = this.GetComponent<BoxCollider2D>().offset.y;
+
+        
+
+
     }
 
     // Update is called once per frame
@@ -156,6 +170,7 @@ public class Hero : MonoBehaviour {
             m_animator.SetInteger("AnimState", 0);
 
 
+
         // Wall Jump
         if (m_facingDirection == 1)
         {
@@ -235,6 +250,26 @@ public class Hero : MonoBehaviour {
 
             // Turn dust in correct X direction
             newDust.transform.localScale = new Vector3(newDust.transform.localScale.x * m_facingDirection, newDust.transform.localScale.y, newDust.transform.localScale.z);
+        }
+    }
+
+
+    // Modification of colliders
+
+    //Divide the collider by 2 while crouching
+    void Col_crouch()
+    {
+        //If its crouching then 
+        if (m_animator.GetInteger("AnimState") == 2 && isGrounded)
+        {
+            this.GetComponent<BoxCollider2D>().size = new Vector2(this.GetComponent<BoxCollider2D>().size.x, colSizeY / 2);
+            this.GetComponent<BoxCollider2D>().offset = new Vector2(this.GetComponent<BoxCollider2D>().offset.x, colOffsetY / 2);
+
+        }
+        else
+        {
+            this.GetComponent<BoxCollider2D>().size = new Vector2(this.GetComponent<BoxCollider2D>().size.x, colSizeY);
+            this.GetComponent<BoxCollider2D>().offset = new Vector2(this.GetComponent<BoxCollider2D>().offset.x, colOffsetY);
         }
     }
 
