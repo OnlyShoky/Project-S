@@ -64,11 +64,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\IdleBehaviour.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\AudioManager_PrototypeHero.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\Dust_DestroyEvent.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\PrototypeHeroDemo.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\Sensor_Prototype.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
+    <Compile Include="Assets\Scripts\HeroCombat.cs" />
+    <Compile Include="Assets\TransitionBasicAttack1Behaviour.cs" />
+    <Compile Include="Assets\TransitionBasicAttack2Behaviour.cs" />
     <None Include="Assets\gitCommands.txt" />
     <Reference Include="UnityEngine">
       <HintPath>E:/Archivos de Programas/Unity/2019.4.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -2119,22 +2119,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1106720095545990043, guid: 0550d26e3e214e54cb4ba5389ace981a,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1106720095545990043, guid: 0550d26e3e214e54cb4ba5389ace981a,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 784715719
-      objectReference: {fileID: 0}
-    - target: {fileID: 1935149485106252118, guid: 0550d26e3e214e54cb4ba5389ace981a,
-        type: 3}
-      propertyPath: m_WallSlide
-      value: 
-      objectReference: {fileID: 2819356657016104444, guid: ac5aca56f3e02b542a258ad9f3b07cc0,
-        type: 3}
     - target: {fileID: 2087542096986835710, guid: 0550d26e3e214e54cb4ba5389ace981a,
         type: 3}
       propertyPath: m_RootOrder
@@ -2195,10 +2179,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrototypeHero v1
       objectReference: {fileID: 0}
-    - target: {fileID: 8506541184483752634, guid: 0550d26e3e214e54cb4ba5389ace981a,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 270470e7fb4ddee4db33067ec6a98164, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0550d26e3e214e54cb4ba5389ace981a, type: 3}

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Hero : MonoBehaviour {
 
+    public static Hero instance;
+
     [Header("Variables")]
     [SerializeField] float      m_maxSpeed = 4.5f;
     [SerializeField] float      m_jumpForce = 7.5f;
@@ -22,8 +24,12 @@ public class Hero : MonoBehaviour {
     float inputX = 0.0f;
     float inputY = 0.0f;
 
+    [Header("Combat")]
+    public bool canReceiveInput;
+    public bool inputReceived;
 
-    [Header("Grounded")]
+
+    
     public Transform groundCheck;
     public LayerMask groundLayer;
     public float groundRadius = 0.2f;
@@ -62,10 +68,17 @@ public class Hero : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+
+        instance = this;
+
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_audioSource = GetComponent<AudioSource>();
         m_audioManager = AudioManager_PrototypeHero.instance;
+
+        //Combat
+        canReceiveInput = true;
+        inputReceived = false;
 
         //Crouching get values of collider
         colSizeY = this.GetComponent<BoxCollider2D>().size.y;
@@ -79,6 +92,7 @@ public class Hero : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        Attack();
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
@@ -96,7 +110,6 @@ public class Hero : MonoBehaviour {
         }
 
         // -- Handle input and movement --
-
 
         if (m_disableMovementTimer < 0.0f)
         {
@@ -137,8 +150,10 @@ public class Hero : MonoBehaviour {
         float SlowDownSpeed = m_moving ? 1.0f : 0.5f;
 
         // Set movement
-        if(isGrounded || jumpTime < Time.time)
+        if((isGrounded || jumpTime < Time.time) && m_disableMovementTimer < 0.0f)
             m_body2d.velocity = new Vector2(inputX * m_maxSpeed * SlowDownSpeed, m_body2d.velocity.y);
+
+
   
 
         // Set AirSpeed in animator
@@ -218,6 +233,43 @@ public class Hero : MonoBehaviour {
 
             m_body2d.velocity = new Vector2(m_xWallForce*-inputX, m_yWallForce);
             
+        }
+
+
+    }
+
+    public void Attack()
+    {
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("Attacke detectado");
+            if (canReceiveInput)
+            {
+                
+                m_body2d.velocity = new Vector2(1*m_facingDirection, 0);
+                inputReceived = true;
+                canReceiveInput = false;
+                m_disableMovementTimer =  0.6f;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+    }
+
+    public void InputManager()
+    {
+
+        if (!canReceiveInput)
+        {
+            canReceiveInput = true;
+        }
+        else
+        {
+            canReceiveInput = false;
         }
 
 
