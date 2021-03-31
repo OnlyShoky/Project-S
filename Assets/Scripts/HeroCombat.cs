@@ -6,14 +6,32 @@ public class HeroCombat : MonoBehaviour
 {
 
     public static HeroCombat instance;
+
+    private Rigidbody2D m_body2d;
+
+    [Header("Input bools")]
     public bool canReceiveInput;
     public bool inputReceived;
+
+    public bool m_disableMovement;
+
+
+    [Header("Basic Attacks Forces")]
+
+    float basic1Force= 30.0f;
+    float basic2Force = 15.0f;
+    float basic3Force = 15.0f;
+
+
+
 
     private void Awake()
     {
         instance = this;
         canReceiveInput = true;
         inputReceived = false;
+
+        m_body2d = GetComponent<Rigidbody2D>();
 
     }
     // Start is called before the first frame update
@@ -62,4 +80,29 @@ public class HeroCombat : MonoBehaviour
 
 
     }
+
+    public void StopImpulse()
+    {
+        m_body2d.velocity = new Vector2(0, 0);
+    }
+    
+    public void ImpulseBasicAttack1()
+    {
+        int faceDirection = Hero.instance.getFaceDirection();
+        m_body2d.velocity = new Vector2(basic1Force* faceDirection, 0);
+    }
+
+    public void ImpulseBasicAttack2()
+    {
+        int faceDirection = Hero.instance.getFaceDirection();
+        m_body2d.velocity = new Vector2(basic2Force* faceDirection, 0);
+    }
+
+     public void ImpulseBasicAttack3()
+    {
+        int faceDirection = Hero.instance.getFaceDirection();
+        m_body2d.velocity = new Vector2(basic3Force* faceDirection, 0);
+    }
+
+
 }

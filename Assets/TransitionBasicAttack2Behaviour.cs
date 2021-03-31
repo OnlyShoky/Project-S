@@ -7,18 +7,18 @@ public class TransitionBasicAttack2Behaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Hero.instance.canReceiveInput = true;
+        HeroCombat.instance.canReceiveInput = true;
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Hero.instance.inputReceived)
+        if (HeroCombat.instance.inputReceived)
         {
             animator.SetTrigger("Attack3");
-            Hero.instance.InputManager();
-            Hero.instance.inputReceived = false;
+            HeroCombat.instance.InputManager();
+            HeroCombat.instance.inputReceived = false;
         }
     }
 

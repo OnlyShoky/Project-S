@@ -20,14 +20,9 @@ public class Hero : MonoBehaviour {
     private AudioManager_PrototypeHero m_audioManager;
     private bool                m_moving = false;
     private int                 m_facingDirection = 1;
-    private float               m_disableMovementTimer = 0.0f;
+    private bool               m_disableMovement = false;
     float inputX = 0.0f;
     float inputY = 0.0f;
-
-    [Header("Combat")]
-    public bool canReceiveInput;
-    public bool inputReceived;
-
 
     
     public Transform groundCheck;
@@ -59,12 +54,6 @@ public class Hero : MonoBehaviour {
 
 
 
-
-
-
-
-
-
     // Use this for initialization
     void Start ()
     {
@@ -76,9 +65,6 @@ public class Hero : MonoBehaviour {
         m_audioSource = GetComponent<AudioSource>();
         m_audioManager = AudioManager_PrototypeHero.instance;
 
-        //Combat
-        canReceiveInput = true;
-        inputReceived = false;
 
         //Crouching get values of collider
         colSizeY = this.GetComponent<BoxCollider2D>().size.y;
@@ -92,9 +78,7 @@ public class Hero : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Attack();
-        // Decrease timer that disables input movement. Used when attacking
-        m_disableMovementTimer -= Time.deltaTime;
+ 
 
         bool touchingGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, LayerMask.GetMask("GroundLayer","PlatformLayer")); 
 
@@ -111,7 +95,7 @@ public class Hero : MonoBehaviour {
 
         // -- Handle input and movement --
 
-        if (m_disableMovementTimer < 0.0f)
+        if (!m_disableMovement)
         {
             inputX = Input.GetAxis("Horizontal");
             inputY = Input.GetAxis("Vertical");
@@ -150,7 +134,7 @@ public class Hero : MonoBehaviour {
         float SlowDownSpeed = m_moving ? 1.0f : 0.5f;
 
         // Set movement
-        if((isGrounded || jumpTime < Time.time) && m_disableMovementTimer < 0.0f)
+        if((isGrounded || jumpTime < Time.time) && !m_disableMovement)
             m_body2d.velocity = new Vector2(inputX * m_maxSpeed * SlowDownSpeed, m_body2d.velocity.y);
 
 
@@ -165,7 +149,7 @@ public class Hero : MonoBehaviour {
 
         // -- Handle Animations --
         //Jump
-        if (Input.GetButtonDown("Jump") && isGrounded && m_disableMovementTimer < 0.0f )
+        if (Input.GetButtonDown("Jump") && isGrounded && !m_disableMovement)
         {
             m_animator.SetTrigger("Jump");
             isGrounded = false;
@@ -238,42 +222,19 @@ public class Hero : MonoBehaviour {
 
     }
 
-    public void Attack()
-    {
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Debug.Log("Attacke detectado");
-            if (canReceiveInput)
-            {
-                
-                m_body2d.velocity = new Vector2(1*m_facingDirection, 0);
-                inputReceived = true;
-                canReceiveInput = false;
-                m_disableMovementTimer =  0.6f;
-            }
-            else
-            {
-                return;
-            }
-        }
+    void DisableMovement()
+    {
+        m_disableMovement = true;
 
     }
 
-    public void InputManager()
+    void ActivateMovement()
     {
-
-        if (!canReceiveInput)
-        {
-            canReceiveInput = true;
-        }
-        else
-        {
-            canReceiveInput = false;
-        }
-
-
+        m_disableMovement = false;
     }
+
+    public int getFaceDirection() { return m_facingDirection; }
 
     // Function used to spawn a dust effect
     // All dust effects spawns on the floor
