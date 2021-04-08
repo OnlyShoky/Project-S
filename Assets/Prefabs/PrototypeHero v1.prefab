@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2087542096986835710}
   - component: {fileID: 1935149485106252118}
+  - component: {fileID: 35755897548916990}
   - component: {fileID: 7720025447597847830}
   - component: {fileID: 1106720095545990043}
   - component: {fileID: 8506541184483752634}
@@ -58,8 +59,6 @@ MonoBehaviour:
     type: 3}
   m_LandingDust: {fileID: 9076098953984712191, guid: c2e199910ba0c9a49bf14491eced2545,
     type: 3}
-  canReceiveInput: 0
-  inputReceived: 0
   groundCheck: {fileID: 8880333773265217718}
   groundLayer:
     serializedVersion: 2
@@ -75,6 +74,20 @@ MonoBehaviour:
   wallJumpTime: 0.15
   wallSlideSpeed: 1
   wallDistance: 0.35
+--- !u!114 &35755897548916990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308645557578422867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196bb88284dbd874ab1a07565efdf53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canReceiveInput: 0
+  inputReceived: 0
 --- !u!95 &7720025447597847830
 Animator:
   serializedVersion: 3
