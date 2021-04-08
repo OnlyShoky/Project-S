@@ -15,12 +15,12 @@ public class CrouchBehaviour : StateMachineBehaviour
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (HeroCombat.instance.inputReceived)
+        if (HeroCombat.instance.inputBA)
         {
             Debug.Log("Crouch Behaviour Attacke one");
             animator.SetTrigger("Attack1");
             HeroCombat.instance.InputManager();
-            HeroCombat.instance.inputReceived = false;
+            HeroCombat.instance.inputBA = false;
         }
 
     }

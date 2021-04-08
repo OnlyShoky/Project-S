@@ -15,12 +15,22 @@ public class IdleBehaviour : StateMachineBehaviour
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (HeroCombat.instance.inputReceived)
+        //Basic Attack in idle o Crouch
+        if (HeroCombat.instance.inputBA)
         {
             Debug.Log("Idle Behaviour Attacke one");
             animator.SetTrigger("Attack1");
             HeroCombat.instance.InputManager();
-            HeroCombat.instance.inputReceived = false;
+            HeroCombat.instance.inputBA = false;
+        }
+
+        //Up Attack in idle
+        if (HeroCombat.instance.inputUpBA)
+        {
+            Debug.Log("Idle Behaviour Attacke one");
+            animator.SetTrigger("UpAttack");
+            HeroCombat.instance.InputManager();
+            HeroCombat.instance.inputUpBA = false;
         }
 
     }
