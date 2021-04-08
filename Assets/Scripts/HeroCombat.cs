@@ -9,9 +9,14 @@ public class HeroCombat : MonoBehaviour
 
     private Rigidbody2D m_body2d;
 
+    public float inputX = 0.0f;
+    public float inputY = 0.0f;
+
     [Header("Input bools")]
     public bool canReceiveInput;
-    public bool inputReceived;
+
+    public bool inputBA;
+    public bool inputUpBA;
 
     public bool m_disableMovement;
 
@@ -29,7 +34,7 @@ public class HeroCombat : MonoBehaviour
     {
         instance = this;
         canReceiveInput = true;
-        inputReceived = false;
+        inputBA = false;
 
         m_body2d = GetComponent<Rigidbody2D>();
 
@@ -49,13 +54,31 @@ public class HeroCombat : MonoBehaviour
 
     public void Attack()
     {
-        
-        if (Input.GetButtonDown("Fire1"))
+        inputX = Input.GetAxis("Horizontal");
+        inputY = Input.GetAxis("Vertical");
+
+        //Basic Attack in idle o Crouch
+        if (Input.GetButtonDown("Fire1") && inputY <= 0.0f)
         {
             Debug.Log("Attacke detectado");
             if (canReceiveInput)
             {
-                inputReceived = true;
+                inputBA = true;
+                canReceiveInput = false;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        //Up Attack in idle
+        if (Input.GetButtonDown("Fire1") && inputY > 0.0f)
+        {
+            Debug.Log("Attacke detectado");
+            if (canReceiveInput)
+            {
+                inputUpBA = true;
                 canReceiveInput = false;
             }
             else
@@ -104,5 +127,9 @@ public class HeroCombat : MonoBehaviour
         m_body2d.velocity = new Vector2(basic3Force* faceDirection, 0);
     }
 
+    public void ImpulseUpBA()
+    {
+        m_body2d.velocity = new Vector2(0, basic1Force);
+    }
 
 }
