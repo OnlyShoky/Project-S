@@ -64,11 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CrouchBehaviour.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\AudioManager_PrototypeHero.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\Dust_DestroyEvent.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\PrototypeHeroDemo.cs" />
     <Compile Include="Assets\Prototype Hero\Scripts\Sensor_Prototype.cs" />
+    <Compile Include="Assets\Scripts\AnimationScripts\CrouchBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationScripts\IdleBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationScripts\TransitionBasicAttack1Behaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationScripts\TransitionBasicAttack2Behaviour.cs" />
