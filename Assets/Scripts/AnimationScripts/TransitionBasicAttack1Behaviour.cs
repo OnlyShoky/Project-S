@@ -15,11 +15,11 @@ public class TransitionBasicAttack1Behaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (HeroCombat.instance.inputReceived)
+        if (HeroCombat.instance.inputBA)
         {
             animator.SetTrigger("Attack2");
             HeroCombat.instance.InputManager();
-            HeroCombat.instance.inputReceived = false;
+            HeroCombat.instance.inputBA = false;
         }
 
         
